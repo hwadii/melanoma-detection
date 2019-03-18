@@ -1,6 +1,7 @@
 # Melanoma Detection
 Detect melanoma in picture and gives you various informations such as color and shape.
 
+Link to Gdoc: [link](https://docs.google.com/document/d/1WmwyXb3Z-fb1jC1WEcBQJy1lI0hD0EtcaVFFoJR76YM/edit#)
 # How to
 ## Requirements
 * `build-essential`
@@ -16,4 +17,4 @@ Detect melanoma in picture and gives you various informations such as color and 
 ## Run
 * `npm start`
   * creates `final.bmp` 
-  * and you can see each step of the process by pressing space
+  * press space to see each step of the process
