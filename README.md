@@ -15,3 +15,5 @@ Detect melanoma in picture and gives you various informations such as color and 
 
 ## Run
 * `npm start`
+  * creates `final.bmp` 
+  * and you can see each step of the process by pressing space
