@@ -62,6 +62,6 @@ const kernelClose = new cv.getStructuringElement(
   cv.imshowWait('maskOpen', maskOpen);
   cv.imshowWait('maskClose', maskClose);
   cv.imshowWait('final', img);
-  // await cv.imwriteAsync('./maskClose.bmp', maskClose);
+  await cv.imwriteAsync('./final.bmp', img);
   // cv.imshowWait('maskFinal', maskFinal);
 })();
