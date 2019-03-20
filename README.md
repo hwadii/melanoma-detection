@@ -18,3 +18,6 @@ Link to Gdoc: [link](https://docs.google.com/document/d/1WmwyXb3Z-fb1jC1WEcBQJy1
 * `npm start`
   * creates `final.bmp` 
   * press space to see each step of the process
+
+## References
+Dataset: https://www.fc.up.pt/addi/ph2%20database.html
