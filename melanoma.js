@@ -1,8 +1,5 @@
 const cv = require('opencv4nodejs');
-
-const lowerBound = new cv.Vec3(0, 80, 0); // light brown
-const upperBound = new cv.Vec3(15, 255, 255); // dark brown
-// const lowerBound2 = new cv.Vec3()
+const masks = require('./masks');
 
 const kernelOpen = new cv.getStructuringElement(
   cv.MORPH_ELLIPSE,
@@ -14,17 +11,39 @@ const kernelClose = new cv.getStructuringElement(
   new cv.Size(20, 20)
 );
 
+const drawRectContours = async (conts, img) => {
+  conts.forEach((cont, i) => {
+    const rect = cont.boundingRect();
+    img.drawRectangle(
+      new cv.Point2(rect.x, rect.y),
+      new cv.Point2(rect.x + rect.width, rect.y + rect.height),
+      new cv.Vec3(0, 0, 255),
+      1
+    );
+  });
+};
+
 (async () => {
-  let img = await cv.imreadAsync('./melanoma3.bmp');
+  let img = await cv.imreadAsync('./pictures/source/melanoma2.bmp');
   img = await img.resizeToMaxAsync(400);
-  // img = await img.gaussianBlurAsync(new cv.Size(5,5), 0);
+
+  // gaussian blur
+  const imgGaussian = await img.gaussianBlurAsync(new cv.Size(45, 45), 0);
+
+  // gray
+  let imgGray = await imgGaussian.cvtColorAsync(cv.COLOR_BGR2GRAY);
+
+  // threshold
+  imgGray = await imgGray.thresholdAsync(120, 255, cv.THRESH_BINARY_INV);
 
   // hsv
-  const imgHSV = await img.cvtColorAsync(cv.COLOR_BGR2HSV);
+  const imgHSV = await imgGaussian.cvtColorAsync(cv.COLOR_BGR2HSV);
 
   // mask
-  const mask = await imgHSV.inRangeAsync(lowerBound, upperBound);
-  // const mask2 = 
+  const mask = await imgHSV.inRangeAsync(
+    masks.red.lowerBound,
+    masks.red.upperBound
+  );
 
   // morphology
   const maskOpen = await mask.morphologyExAsync(kernelOpen, cv.MORPH_OPEN);
@@ -40,28 +59,13 @@ const kernelClose = new cv.getStructuringElement(
     cv.RETR_EXTERNAL,
     cv.CHAIN_APPROX_NONE
   );
-  console.log(conts);
-  // console.log(conts);
   img.drawContours(conts, new cv.Vec3(255, 0, 0));
-
-  conts.forEach((cont, i) => {
-    const rect = cont.boundingRect();
-    img.drawRectangle(
-      new cv.Point2(rect.x, rect.y),
-      new cv.Point2(rect.x + rect.width, rect.y + rect.height),
-      new cv.Vec3(0, 0, 255),
-      1
-    );
-    console.log(rect.width);
-    img.putText("1", new cv.Point2(rect.x, rect.y + rect.h), cv.FONT_HERSHEY_SIMPLEX, 1, new cv.Vec3(0, 255, 0));
+  conts.forEach(cont => {
+    console.log(cont.area);
   });
+  await drawRectContours(conts, img);
 
   cv.imshowWait('mask', mask);
-  // cv.imshowWait('real', img);
-  // cv.imshowWait('final', img);
-  cv.imshowWait('maskOpen', maskOpen);
-  cv.imshowWait('maskClose', maskClose);
+  // cv.imshowWait('thres', imgGray);
   cv.imshowWait('final', img);
-  await cv.imwriteAsync('./final.bmp', img);
-  // cv.imshowWait('maskFinal', maskFinal);
 })();
