@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Melanoma Detection</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"
+    />
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <a class="navbar-brand" href="#">Melanoma Detection</a>
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/">Home</a>
+        <a class="nav-item nav-link" href="/about">About</a>
+      </div>
+    </nav>
+    <br />
+    <div class="container">
+      <h2>Detection</h2>
+      <p>
+        This is a web application. You give it a picture of a melanoma
+        (preferably high quality) and it gives you back some informations about
+        the melanoma that you've just sent.
+      </p>
+
+      <input type="file" id="melanoma" onchange="handleFile(this.files)" />
+    </div>
+  </body>
+</html>
