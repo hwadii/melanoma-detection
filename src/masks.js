@@ -2,6 +2,7 @@
 // {blue, lightBrown, darkBrown, red, white, black}
 // for every color: [lowerBound, upperBound]
 const Vec3 = require('opencv4nodejs').Vec3;
+const hsv = require('./utils');
 
 const colors = {
   blue: [new Vec3(110, 50, 50), new Vec3(130, 255, 255)],

@@ -24,11 +24,11 @@ const drawRectContours = async (conts, img) => {
 };
 
 (async () => {
-  let img = await cv.imreadAsync('./pictures/source/melanoma2.bmp');
+  let img = await cv.imreadAsync('./pictures/source/IMD381.bmp');
   img = await img.resizeToMaxAsync(400);
 
   // gaussian blur
-  const imgGaussian = await img.gaussianBlurAsync(new cv.Size(45, 45), 0);
+  const imgGaussian = await img.gaussianBlurAsync(new cv.Size(55, 55), 0);
 
   // gray
   let imgGray = await imgGaussian.cvtColorAsync(cv.COLOR_BGR2GRAY);
@@ -41,8 +41,8 @@ const drawRectContours = async (conts, img) => {
 
   // mask
   const mask = await imgHSV.inRangeAsync(
-    masks.red.lowerBound,
-    masks.red.upperBound
+    masks.lightBrown.lowerBound,
+    masks.lightBrown.upperBound
   );
 
   // morphology
@@ -59,10 +59,9 @@ const drawRectContours = async (conts, img) => {
     cv.RETR_EXTERNAL,
     cv.CHAIN_APPROX_NONE
   );
+
   img.drawContours(conts, new cv.Vec3(255, 0, 0));
-  conts.forEach(cont => {
-    console.log(cont.area);
-  });
+
   await drawRectContours(conts, img);
 
   cv.imshowWait('mask', mask);
