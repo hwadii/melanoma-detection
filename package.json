@@ -2,14 +2,16 @@
   "name": "opencv-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node melanoma.js"
+    "test": "node src/melanoma.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.4",
     "npm": "^6.9.0",
     "opencv4nodejs": "^4.14.1"
   }
