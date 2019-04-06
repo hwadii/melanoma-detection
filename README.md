@@ -15,9 +15,11 @@ Link to Gdoc: [link](https://docs.google.com/document/d/1WmwyXb3Z-fb1jC1WEcBQJy1
 3. `npm install` (this may take a while because it builds OpenCV from source)
 
 ## Run
-* `npm start`
-  * creates `final.bmp` 
+* `npm run test`
+  * displays process
   * press space to see each step of the process
+* npm start
+  * to start the web app
 
 ## References
 Dataset: https://www.fc.up.pt/addi/ph2%20database.html
