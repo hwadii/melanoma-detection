@@ -18,7 +18,7 @@ Link to Gdoc: [link](https://docs.google.com/document/d/1WmwyXb3Z-fb1jC1WEcBQJy1
 * `npm run test`
   * displays process
   * press space to see each step of the process
-* npm start
+* `npm start`
   * to start the web app
 
 ## References
