@@ -23,7 +23,7 @@ const drawRectContours = async (conts, img) => {
   });
 };
 
-(async () => {
+const main = async () => {
   let img = await cv.imreadAsync('./pictures/source/IMD381.bmp');
   img = await img.resizeToMaxAsync(400);
 
@@ -67,4 +67,8 @@ const drawRectContours = async (conts, img) => {
   cv.imshowWait('mask', mask);
   // cv.imshowWait('thres', imgGray);
   cv.imshowWait('final', img);
-})();
+};
+
+// main();
+
+module.exports = { kernelClose };
