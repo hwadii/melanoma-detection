@@ -9,7 +9,6 @@
       rel="stylesheet"
       href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"
     />
-    <script src="index.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-light bg-light">
@@ -27,8 +26,19 @@
         (preferably high quality) and it gives you back some informations about
         the melanoma that you've just sent.
       </p>
-
-      <input type="file" id="melanoma" onchange="handleFile(this.files)" />
+      <p>
+        Please select an image with the file selector below.
+      </p>
+      <input
+        type="file"
+        accept=".bmp, .png, .jpeg"
+        id="melanoma"
+        onchange="handleFile(this.files)"
+      />
+      <br />
+      <br />
+      <canvas id="img"></canvas>
     </div>
   </body>
+  <script src="index.js"></script>
 </html>
