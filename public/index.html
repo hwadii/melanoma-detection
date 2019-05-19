@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-light bg-light">
@@ -38,6 +39,37 @@
       <br />
       <br />
       <canvas id="img"></canvas>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Colors</th>
+            <th scope="col">Symmetry</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">IMD002</th>
+            <td>
+              <ul>
+                <li>Red: <span id="red"></span></li>
+                <li>Light Brown: <span id="lb"></span></li>
+                <li>Dark Brown: <span id="db"></span></li>
+                <li>Blue: <span id="b"></span></li>
+                <li>Black: <span id="bl"></span></li>
+                <li>White: <span id="white"></span></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Fully symmetric</li>
+                <li>Symmetric in 1 axe</li>
+                <li>Fully assymetric</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
   <script src="index.js"></script>

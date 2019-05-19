@@ -10,7 +10,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/stuff', (req, res) => {
-  res.send(melanoma.kernelClose);
+  melanoma.main('./pictures/source/IMD002.bmp');
+  res.send(melanoma.counts);
 });
 
 app.get('/about', (req, res) => {

@@ -1,9 +1,15 @@
 const melanoma = document.getElementById('melanoma');
 const resId = document.getElementById('res');
+const red = document.getElementById('red');
+const lb = document.getElementById('lb');
+const db = document.getElementById('db');
+const b = document.getElementById('b');
+const white = document.getElementById('white');
+const bl = document.getElementById('bl');
 
 (async () => {
   const res = await fetch('/stuff');
-  const kernelClose = await res.json();
+  const stats = await res.json();
 })();
 
 const handleFile = files => {
