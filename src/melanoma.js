@@ -22,7 +22,7 @@ const main = async (src) => {
         if (mask.at(i, j) == 255) count++;
       }
     // console.log(`count: ${count}, color: ${e.name}`);
-    if (counts.length > 6) counts.push({color: e.name, count: count})
+    if (counts.length < 6) counts.push({color: e.name, count: count})
     else counts = [];
   });
   // cv.imshowWait("Source", img);

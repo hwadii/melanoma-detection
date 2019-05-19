@@ -10,6 +10,7 @@ const bl = document.getElementById('bl');
 (async () => {
   const res = await fetch('/stuff');
   const stats = await res.json();
+  console.log(stats);
 })();
 
 const handleFile = files => {
