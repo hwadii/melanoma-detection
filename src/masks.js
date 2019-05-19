@@ -2,30 +2,43 @@
 // {blue, lightBrown, darkBrown, red, white, black}
 // for every color: [lowerBound, upperBound]
 const Vec3 = require('opencv4nodejs').Vec3;
-const hsv = require('./utils');
 
 const colors = {
-  blue: [new Vec3(110, 50, 50), new Vec3(130, 255, 255)],
-  lightBrown: [new Vec3(10, 100, 50), new Vec3(20, 200, 200)],
-  darkbrown: [new Vec3(10, 200, 50), new Vec3(20, 255, 200)],
-  red: [new Vec3(0, 70, 20), new Vec3(10, 255, 255)],
-  white: [new Vec3(0, 0, 200), new Vec3(180, 255, 255)],
-  black: [new Vec3(0, 0, 0), new Vec3(180, 255, 30)]
+  black: [new Vec3(0, 90, 84), new Vec3(6, 255, 255)],
+  darkbrown: [new Vec3(2, 90, 80), new Vec3(10, 160, 151)],
+  lightBrown: [new Vec3(10, 115, 85), new Vec3(15, 255, 255)],
+  blue: [new Vec3(100, 0, 0), new Vec3(140, 50, 180)],
+  white: [new Vec3(0, 0, 255), new Vec3(180, 50, 255)],
+  red: [new Vec3(165, 0, 96), new Vec3(180, 255, 255)]
 };
 
 const masks = {
-  blue: { lowerBound: colors.blue[0], upperBound: colors.blue[1] },
+  blue: {
+    lowerBound: colors.blue[0],
+    upperBound: colors.blue[1],
+    name: 'blue'
+  },
   lightBrown: {
     lowerBound: colors.lightBrown[0],
-    upperBound: colors.lightBrown[1]
+    upperBound: colors.lightBrown[1],
+    name: 'light brown'
   },
   darkBrown: {
     lowerBound: colors.darkbrown[0],
-    upperBound: colors.darkbrown[1]
+    upperBound: colors.darkbrown[1],
+    name: 'dark brown'
   },
-  red: { lowerBound: colors.red[0], upperBound: colors.red[1] },
-  white: { lowerBound: colors.white[0], upperBound: colors.white[1] },
-  black: { lowerBound: colors.black[0], upperBound: colors.black[1] }
+  red: { lowerBound: colors.red[0], upperBound: colors.red[1], name: 'red' },
+  white: {
+    lowerBound: colors.white[0],
+    upperBound: colors.white[1],
+    name: 'white'
+  },
+  black: {
+    lowerBound: colors.black[0],
+    upperBound: colors.black[1],
+    name: 'black'
+  }
 };
 
 module.exports = masks;

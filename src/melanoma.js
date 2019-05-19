@@ -1,74 +1,52 @@
 const cv = require('opencv4nodejs');
 const masks = require('./masks');
 
-const kernelOpen = new cv.getStructuringElement(
-  cv.MORPH_ELLIPSE,
-  new cv.Size(7, 7)
-);
-
-const kernelClose = new cv.getStructuringElement(
-  cv.MORPH_ELLIPSE,
-  new cv.Size(20, 20)
-);
-
-const drawRectContours = async (conts, img) => {
-  conts.forEach((cont, i) => {
-    const rect = cont.boundingRect();
-    img.drawRectangle(
-      new cv.Point2(rect.x, rect.y),
-      new cv.Point2(rect.x + rect.width, rect.y + rect.height),
-      new cv.Vec3(0, 0, 255),
-      1
-    );
-  });
-};
-
+const arrayOfRanges = [masks.lightBrown, masks.darkBrown, masks.red, masks.white, masks.blue, masks.black];
+const arrayOfImages = [2, 3, 4, 6, 8, 9, 10, 13, 14];
 const main = async () => {
-  let img = await cv.imreadAsync('./pictures/source/IMD381.bmp');
+  let count = 0;
+  let img = await cv.imreadAsync('./pictures/source/IMD045.bmp');
   img = await img.resizeToMaxAsync(400);
 
-  // gaussian blur
-  const imgGaussian = await img.gaussianBlurAsync(new cv.Size(55, 55), 0);
-
-  // gray
-  let imgGray = await imgGaussian.cvtColorAsync(cv.COLOR_BGR2GRAY);
-
-  // threshold
-  imgGray = await imgGray.thresholdAsync(120, 255, cv.THRESH_BINARY_INV);
-
-  // hsv
+  const imgGaussian = await img.gaussianBlurAsync(new cv.Size(5, 5), 0);
   const imgHSV = await imgGaussian.cvtColorAsync(cv.COLOR_BGR2HSV);
-
-  // mask
-  const mask = await imgHSV.inRangeAsync(
-    masks.lightBrown.lowerBound,
-    masks.lightBrown.upperBound
-  );
-
-  // morphology
-  const maskOpen = await mask.morphologyExAsync(kernelOpen, cv.MORPH_OPEN);
-  const maskClose = await maskOpen.morphologyExAsync(
-    kernelClose,
-    cv.MORPH_CLOSE
-  );
-
-  let maskFinal = maskClose;
-  maskFinal = await maskFinal.copyAsync();
-
-  const conts = await maskFinal.findContoursAsync(
-    cv.RETR_EXTERNAL,
-    cv.CHAIN_APPROX_NONE
-  );
-
-  img.drawContours(conts, new cv.Vec3(255, 0, 0));
-
-  await drawRectContours(conts, img);
-
-  cv.imshowWait('mask', mask);
-  // cv.imshowWait('thres', imgGray);
-  cv.imshowWait('final', img);
+  let mask;
+  arrayOfRanges.forEach(async e => {
+    mask = await imgHSV.inRangeAsync(e.lowerBound, e.upperBound);
+    count = 0;
+    for (let i = 0; i < mask.rows; i++)
+      for (let j = 0; j < mask.cols; j++) {
+        if (mask.at(i, j) == 255) count++;
+      }
+    cv.imshowWait("Res", mask);
+    console.log(`count: ${count}, color: ${e.name}`);
+  });
+  // cv.imshowWait("Source", img);
 };
 
-// main();
+const altMain = async () => {
+  arrayOfImages.forEach(async im => {
+    let count = 0;
+    let img = await cv.imreadAsync('./pictures/source/IMD00'+im+'.bmp');
+    img = await img.resizeToMaxAsync(400);
 
-module.exports = { kernelClose };
+    const imgGaussian = await img.gaussianBlurAsync(new cv.Size(5, 5), 0);
+    const imgHSV = await imgGaussian.cvtColorAsync(cv.COLOR_BGR2HSV);
+    let mask;
+    arrayOfRanges.forEach(async e => {
+      mask = await imgHSV.inRangeAsync(e.lowerBound, e.upperBound);
+      count = 0;
+      for (let i = 0; i < mask.rows; i++)
+        for (let j = 0; j < mask.cols; j++) {
+          if (mask.at(i, j) == 255) count++;
+        }
+      // cv.imshowWait("Res", mask);
+      console.log(`im: ${im}, count: ${count}, color: ${e.name}`);
+    });
+    cv.imshowWait("Source", img);
+    console.log('\n');
+  });
+}
+
+main();
+// altMain();
