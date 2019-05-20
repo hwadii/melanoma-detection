@@ -5,11 +5,11 @@ const Vec3 = require('opencv4nodejs').Vec3;
 
 const colors = {
   red: [new Vec3(0, 90, 84), new Vec3(2, 255, 255)],
-  darkbrown: [new Vec3(2, 90, 80), new Vec3(10, 160, 151)],
-  lightBrown: [new Vec3(10, 115, 85), new Vec3(15, 255, 255)],
+  darkbrown: [new Vec3(2, 90, 80), new Vec3(12, 160, 151)],
+  lightBrown: [new Vec3(12, 115, 85), new Vec3(30, 255, 255)],
   blue: [new Vec3(100, 0, 0), new Vec3(140, 50, 180)],
   white: [new Vec3(0, 0, 255), new Vec3(180, 50, 255)],
-  black: [new Vec3(0, 108, 69), new Vec3(10, 255, 160)]
+  black: [new Vec3(160, 0, 0), new Vec3(180, 255, 255)]
 };
 
 const masks = {
